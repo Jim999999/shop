@@ -1,21 +1,11 @@
 <template>
-  <div id="app">
-    <keep-alive><!-- 缓存 -->
-          <router-view   v-if="($route.meta.keepAlive)"></router-view>
-    </keep-alive>
-    <router-view   v-if="(!$route.meta.keepAlive)"></router-view>
-    <!-- <footer-bar></footer-bar> -->
-    <router-view name="footer-bar"></router-view>
-
-
-
-    <!-- <van-tabbar v-model="active" @change="change">
+  <div id="tabbar">
+    <van-tabbar v-model="active" @change="change">
       <van-tabbar-item icon="wap-home-o" to="/">首页</van-tabbar-item>
       <van-tabbar-item icon="apps-o" to="/category">分类</van-tabbar-item>
       <van-tabbar-item icon="shopping-cart-o" to="/cart">购物车</van-tabbar-item>
       <van-tabbar-item icon="user-o" to="/about">我的</van-tabbar-item>
-    </van-tabbar> -->
-
+    </van-tabbar>
 
    <!--  <router-view/>
      <ul class="foot-bar">
@@ -28,7 +18,6 @@
 </template>
 
 <script>
-// import FooterBar from '@/components/FooterBar.vue'
   export default {
     data() {
       return {

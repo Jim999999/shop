@@ -28,7 +28,7 @@
       </div>
     </swiper-slide>
    </swiper>
-  </div>
+</div>
 
 <!-- 推荐商品 -->
 <div class="variety">
