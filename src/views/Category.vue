@@ -98,6 +98,9 @@ export default {
 <style scoped>
 .nav{
   background: #eee;
+  position: fixed;
+  top: 0.6rem;
+
 }
 .nav li {
   height: 0.6rem;
@@ -114,5 +117,7 @@ export default {
   flex-wrap: wrap;
   text-align: center;
   justify-content: space-around;
+  margin-left: 1.6rem;
+  width: 100%;
 }
 </style>
