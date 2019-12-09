@@ -57,3 +57,29 @@ var getVarietyGoods = function(){
 Mock.mock('http://www.abc.com/getVarietyGoods',getVarietyGoods);
 
 
+
+
+//分类数据
+
+var getCategoryGoods = function(typeId=1){
+    let data = [];
+    // let category_typeId = [1,2,3,4,5,6,7,8];
+    for(let i=0 ;i<20;i++){
+        let goods = {};
+        goods = {
+            typeId : typeId,//Math.ceil(Math.random(1,9)),
+            name : Random.ctitle(10), 
+            price : Random.integer(5000,15000), 
+            img : Random.dataImage('125x125','图'+i),
+        }; 
+        data.push(goods);  
+    }
+
+    return data;
+}
+//接收post的参数
+Mock.mock('/getCategoryGoods','post',(options)=>{
+    //console.log(options.body) //{"typeId":4}
+    let typeId = JSON.parse(options.body).typeId;
+    return getCategoryGoods(typeId);
+  });

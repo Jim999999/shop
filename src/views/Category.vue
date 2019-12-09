@@ -5,12 +5,23 @@
   </div>
   <div class="category">
     <van-row>
-      <van-col span="6" class="nav" >
+      <van-col span="6" class="nav">
         <ul>
-          <li @click="selectCategory(item.typeId,index)" :class="{active:is_active === index}" v-for="(item,index) of types" :key="index">{{item.typeName}}</li>
+          <li :typeId="item.typeId" @click="selectCategory(item.typeId,index)" :class="{active:is_active === index}" v-for="(item,index) of types" :key="index">{{item.typeName}}
+          </li>
         </ul>
       </van-col>
-      <van-col span="18" class="container"></van-col>
+      <van-col span="18" class="container">
+        <van-row>
+          <ul class="item">
+            <li class="item-li" v-for="(item , index) of categoryGoods" :key="index">
+              <img :src="item.img" alt="">
+              <p class="title">{{item.name}}</p>
+              <p class="price">￥{{item.price}}</p>
+            </li>
+          </ul>
+        </van-row>
+      </van-col>
     </van-row>
 
   </div>
@@ -19,9 +30,13 @@
 </template>
 
 <script>
+// import url from '@/service.config.js';
+import axios from 'axios';
+
 export default {
   data() { 
     return {
+     categoryGoods:[],
      is_active:0,
      types : [
           {
@@ -51,12 +66,31 @@ export default {
           }
       ],
     };
-  },methods:{
+  },created() {
+    //init
+    this.categoryGoods = this.selectCategory(1,0);
+     
+  },
+  methods:{
     // onClickLeft() {
     //   this.$router.go(-1);
     // },
     selectCategory(typeId,index){
       this.is_active = index;
+
+      // console.log(typeId);
+      axios({
+        method: "post",
+        url : '/getCategoryGoods',
+        data : {typeId : typeId},
+      }).then(res=>{
+        // console.log(res);
+        this.categoryGoods = res.data;
+      }).catch(err=>{
+        console.log(err);
+      });
+     
+
     },
   }
 }
@@ -75,4 +109,10 @@ export default {
 .active {
   background: #fff;
 }
-</style>>
+.item{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: space-around;
+}
+</style>
